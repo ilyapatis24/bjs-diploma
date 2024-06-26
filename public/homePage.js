@@ -30,9 +30,9 @@ let handler = (showFunc, errorBox, method, message) => data => method(data, resp
     if (response.success) {
         showFunc(response.data);
         let fullMessage = response.data.created_at ? `${response.data.created_at}, ${response.data.login}: ` + message : message;
-        errorBox.setMessage(!response.success, fullMessage);
+        errorBox.setMessage(response.success, fullMessage);
     } else {
-        errorBox.setMessage(!response.success, response.data);
+        errorBox.setMessage(response.success, "Ошибка при выполнении операции");
     }
 });
 
