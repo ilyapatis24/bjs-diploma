@@ -1,9 +1,9 @@
 "use strict";
 
-let logoutButton = new LogoutButton();
-let ratesBoard = new RatesBoard();
-let moneyManager = new MoneyManager();
-let favoritesWidget = new FavoritesWidget();
+const logoutButton = new LogoutButton();
+const ratesBoard = new RatesBoard();
+const moneyManager = new MoneyManager();
+const favoritesWidget = new FavoritesWidget();
 
 let callbackFunction = method => response => (response.success) && method(response.data);
 
@@ -29,10 +29,9 @@ function updateFavorites(data) {
 let handler = (showFunc, errorBox, method, message) => data => method(data, response => {
     if (response.success) {
         showFunc(response.data);
-        let fullMessage = response.data.created_at ? `${response.data.created_at}, ${response.data.login}: ` + message : message;
-        errorBox.setMessage(response.success, fullMessage);
+        errorBox.setMessage(response.success, message);
     } else {
-        errorBox.setMessage(response.success, "Ошибка при выполнении операции");
+        errorBox.setMessage(response.success, response.error);
     }
 });
 
